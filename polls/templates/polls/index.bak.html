@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/bootstrap-table.css' %}">
+    <script src="{% static 'polls/js/jquery.min.js' %}"></script>
+    <script src="{% static 'polls/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'polls/js/bootstrap-table.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+          $("#btn").click(function(){
+            $("a, .nvbar-brand").toggle();
+          });
+        });
+    </script>
+</head>
+<body>
+{#navigation#}
+<nav class="navbar navbar-expand-lg navbar-dark bg-green container">
+  <button id="btn">Show/Hide</button>
+  <a class="navbar-brand" href="#">NVIDIA SWDL-QA</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href={% url 'polls:table' %}>bootstrap table</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<br>
+<form action="{% url 'polls:search' %}" method="post" class="container">
+  {% csrf_token %}
+  <div class="form-row align-items-center">
+    <div class="col-auto my-1">
+      <label class="mr-sm-2" for="inlineFormCustomSelect">CUDA VERSION</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="cudaVer">
+        <option selected>Choose...</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-auto my-1">
+      <label class="mr-sm-2" for="inlineFormCustomSelect1">Driver</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect1" name="driver">
+        <option selected>Choose...</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    <div class="col-auto my-1">
+      <div class="custom-control custom-checkbox mr-sm-2">
+        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+        <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+      </div>
+    </div>
+    <div class="col-auto my-1">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</form>
+<div class="container">
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+{# bad for hard code <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>#}
+    {% endfor %}
+    </ul>
+
+    <table id="table" class="table table-bordered table-sm table-hover">
+    <caption>条纹表格布局</caption>
+    <thead class="thead-light">
+        <tr>
+            <th data-sortable="true">ID</th>
+            <th scope="col" data-sortable="true">Question</th>
+            <th scope="col">Choice</th>
+            <th data-sortable="true">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for question in latest_question_list %}
+        <tr>
+            <td>{{ question.id }}</td>
+            <td rowspan="1">{{ question.question_text  }}</td>
+{#            <th rowspan="3">{{ question.question_text  }}</th>#}
+            <td>{% for choice in question.choice_set.all %}
+                    {{ choice.choice_text }}
+            {% endfor %}</td>
+            <td>{{ question.pub_date }}</td>
+        </tr>
+{#            {% for choice in question.choice_set.all %}#}
+{#            <tr>#}
+{#                <td>{{ choice.choice_text }}</td>#}
+{#            </tr>#}
+{#            {% endfor %}#}
+        {% endfor %}
+    </tbody>
+    </table>
+    <script>
+      $(function() {
+        $('#table').bootstrapTable()
+      })
+    </script>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</div>
+</body>
+</html>

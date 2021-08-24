@@ -1,0 +1,73 @@
+{% extends 'polls/navigation.html' %}
+
+{% block content %}
+    <h1 class="container">CUDA VERSION:  {{ cudaVer }}  Driver: {{ driver }}</h1>
+    <table id="table" data-toggle="table" class="container">
+      <thead>
+        <tr>
+          <th data-sortable="true">Item ID</th>
+          <th>Item Name</th>
+          <th>Item Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Item 1</td>
+          <td>$1</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Item 2</td>
+          <td>$2</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+      $(function() {
+        $('#table').bootstrapTable()
+      })
+    </script>
+<br>
+
+    <table id="table" class="container">booststrap table via js</table>
+    <script>
+        let columns = [{
+            field: 'id',
+            title: 'Item ID'
+          }, {
+            field: 'question',
+            title: 'question'
+          }, {
+            field: 'choice',
+            title: 'choice'
+          }];
+{#        {% for latest_question in latest_question_list %}#}
+{##}
+{#        {% endfor %}#}
+
+        let data = [
+{#            {% for latest_question in latest_question_list %}#}
+{#                {#}
+{#                    id: {{ last_question.id }},#}
+{#                    question: '{{ latest_question.question_text }}',#}
+{#                    choice: 'choice item'#}
+{#                },#}
+{#            {% endfor %}];#}
+            {
+                id: 1,
+                question: 'Item 1',
+                choice: '$1'
+            },
+            {
+                id: 2,
+                question: 'Item 2',
+                choice: '$2'
+            },
+            ];
+        $('#table').bootstrapTable({
+          columns: columns,
+          data: data,
+        })
+    </script>
+{% endblock %}
