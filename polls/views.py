@@ -46,6 +46,7 @@ def table(request):
     # template = loader.get_template('polls/index.html')
     context = {
         'latest_question_list': latest_question_list,
+        'ten': 10,
     }
     return render(request, 'polls/bt_table.html', context)
 
