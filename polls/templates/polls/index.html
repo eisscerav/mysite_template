@@ -24,7 +24,7 @@
     </div>
     <div class="col-auto my-1">
       <div class="custom-control custom-checkbox mr-sm-2">
-        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+        <input type="checkbox" class="custom-control-input" id="customControlAutosizing" name="preference">
         <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
       </div>
     </div>
@@ -42,7 +42,7 @@
     {% endfor %}
     </ul>
 
-    <table id="table" class="table table-bordered table-sm table-hover">
+    <table id="table" class="table table-striped table-bordered table-sm">
     <caption>条纹表格布局</caption>
     <thead class="thead-light">
         <tr>
@@ -73,7 +73,15 @@
     </table>
     <script>
       $(function() {
-        $('#table').bootstrapTable()
+        $('#table').bootstrapTable({
+            pagination: true,
+            pageSize: 5,
+            paginationLoop: false,
+            pageList: [5, 10, 20],
+            search: true,
+            smartDisplay:false,
+        });
+        $('.dataTables_length').addClass('bs-select');
       })
     </script>
 {% else %}
