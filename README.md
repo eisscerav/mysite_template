@@ -1,6 +1,7 @@
 # mysite_template
 
-## nginx error: see /var/log/nginx/error.log
+## nginx error: 
+ - see /var/log/nginx/error.log
 
 ## Setup uWSGI+nginx+Django
 [reference doc](https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html#configure-nginx-for-your-site)

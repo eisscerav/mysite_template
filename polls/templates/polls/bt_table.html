@@ -1,87 +1,106 @@
 {% extends 'polls/navigation.html' %}
+{% load static %}
 
 {% block content %}
     <div class="container">
-    <h1 class="container">CUDA VERSION:  {{ cudaVer }}  Driver: {{ driver }}</h1>
-    <table id="table" data-toggle="table" class="container">
-      <thead>
-        <tr>
-          <th data-sortable="true">Item ID</th>
-          <th>Item Name</th>
-          <th>Item Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Item 1</td>
-          <td>$1</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Item 2</td>
-          <td>$2</td>
-        </tr>
-      </tbody>
-    </table>
-    <script>
-      $(function() {
-        $('#table').bootstrapTable()
-      })
-    </script>
-<br>
-    <button id="btn1" class="button">Draw Canvas</button>
+        {% if  cudaVer != "CUDA VERSION..."  %}
+        <h1 class="container">CUDA VERSION:  {{ cudaVer }}  Driver: {{ driver }}</h1>
+        {% endif %}
+        <table id="table" data-toggle="table" class="container">
+          <thead>
+            <tr>
+              <th data-sortable="true">Item ID</th>
+              <th>Item Name</th>
+              <th>Item Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Item 1</td>
+              <td>$1</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Item 2</td>
+              <td>$2</td>
+            </tr>
+          </tbody>
+        </table>
+        <script>
+          $(function() {
+            $('#table').bootstrapTable()
+          })
+        </script>
+    <br>
+        <button id="btn1" class="button">Draw Canvas</button>
+        <table id="table" class="container">booststrap table via js</table>
+        <script>
+            let columns = [{
+                field: 'id',
+                title: 'Item ID'
+              }, {
+                field: 'question',
+                title: 'question'
+              }, {
+                field: 'choice',
+                title: 'choice'
+              }];
 
-    <table id="table" class="container">booststrap table via js</table>
-    <script>
-        let columns = [{
-            field: 'id',
-            title: 'Item ID'
-          }, {
-            field: 'question',
-            title: 'question'
-          }, {
-            field: 'choice',
-            title: 'choice'
-          }];
+            let data = [
+                {
+                    id: 1,
+                    question: 'Item 1',
+                    choice: '$1'
+                },
+                {
+                    id: 2,
+                    question: 'Item 2',
+                    choice: '$2'
+                },
+                ];
+            $('#table').bootstrapTable({
+              columns: columns,
+              data: data,
+            })
+        </script>
+        <canvas></canvas>
+        <canvas></canvas>
+        <script>
+            $("canvas").drawPolygon({
+              draggable: true,
+              fillStyle: "#6c3",
+              x: 100, y: 100,
+              radius: 50, sides: {{ ten }}
+            }).drawLayers();
 
-        let data = [
-            {
-                id: 1,
-                question: 'Item 1',
-                choice: '$1'
-            },
-            {
-                id: 2,
-                question: 'Item 2',
-                choice: '$2'
-            },
-            ];
-        $('#table').bootstrapTable({
-          columns: columns,
-          data: data,
-        })
-    </script>
-    <canvas></canvas>
-    <canvas></canvas>
-    <script>
-        $("canvas").drawPolygon({
-          draggable: true,
-          fillStyle: "#6c3",
-          x: 100, y: 100,
-          radius: 50, sides: {{ ten }}
-        }).drawLayers();
-
-        $(function (){
-            $("#btn1").click(function (){
-                $("canvas").eq(1).toggle(function (){
-                    //callback for toggle()
+            $(function (){
+                $("#btn1").click(function (){
+                    $("canvas").eq(1).toggle(function (){
+                        //callback for toggle()
+                    });
                 });
             });
-        });
-        $(function (){
-            //something
-        })
-    </script>
+            $(function (){
+                //something
+            })
+        </script>
     </div>
+    <table
+{#      class="container"#}
+      data-toggle="table"
+      data-height="460"
+      data-url="{% static 'polls/data1.json' %}"
+      data-show-columns="true"
+      data-show-columns-search="true"
+      data-show-fullscreen="true"
+    >
+      <thead>
+        <tr>
+          <th data-field="id">Item ID</th>
+          <th data-field="name">Item Name</th>
+          <th data-field="price">Item Price</th>
+        </tr>
+      </thead>
+    </table>
 {% endblock %}

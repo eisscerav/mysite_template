@@ -1,0 +1,66 @@
+{% extends 'polls/navigation.html' %}
+{#{% load static %}#}
+
+{% block content %}
+    <div id="echarts_demo" style="width: 1600px;height:400px;"></div>
+
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('echarts_demo'));
+      var scores = [];
+      var ages = [];
+      var names = [];
+
+      {% for person in persons %}
+          scores.push({{ person.score }})
+          ages.push({{ person.age }})
+          names.push("{{ person.name }}")
+      {% endfor %}
+
+      // 指定图表的配置项和数据
+      var option = {
+        title: {
+          text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+          data: ['scores', 'age']
+          {#data: ['销量']#}
+        },
+        xAxis: {
+          name: "name",
+          nameLocation: "end",
+          axisTick: {
+            show: true,
+            alignWithLabel: true,
+          },
+          axisLabel: {
+            interval: 0,
+            rotate: 60
+          },
+          {#data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']#}
+          data: names
+        },
+        yAxis: {
+          name: "score",
+          nameLocation: "middle",
+        },
+        series: [
+          {
+            name: 'scores',
+            type: 'bar',
+            data: scores
+            {#data: [5, 20, 36, 10, 10, 20]#}
+          },
+          {
+            name: 'age',
+            type: 'line',
+            data: ages
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+{% endblock %}

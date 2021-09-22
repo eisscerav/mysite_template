@@ -1,12 +1,12 @@
-import sys
+import sys, os, json
 sys.path.append(r"/home/fanxin/github/mysite_template")
-import os, django
+import django
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite_template.settings")
 django.setup()
 
 
-from polls.models import Question, Choice
+from polls.models import Question, Choice, Person
 from django.utils import timezone
 import datetime
 import random
@@ -42,7 +42,31 @@ def genData():
     # q.choice_set.create(choice_text="ghi", votes=5)
 
 
+def genJson():
+    print("Generate foo data in json fashion")
+    mydict = {}
+    mydict["id"] = 1
+    mydict["name"] = "football"
+    mydict["price"] = 100
+    json_obj = json.dumps(mydict)
+    print(json_obj)
+    with open("myData.json", "w") as output:
+        json.dump(mydict, output)
+
+
+def genPerson():
+    print("Generate foo data for table Person")
+    foo_names = [chr(x) for x in range(65, 91)]
+    numOfPerson = random.randint(1, 10)
+    for each in range(numOfPerson):
+        name = random.sample(foo_names, random.randint(3,7))
+        name = ''.join(name)
+        person = Person(name=name, age=random.randint(18, 22), score=random.randint(60, 100))
+        person.save()
+
+
 if __name__ == "__main__":
-    genData()
+    genPerson()
+
 
 
