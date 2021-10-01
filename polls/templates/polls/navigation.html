@@ -6,10 +6,14 @@
         <title>index</title>
         <link rel="stylesheet" type="text/css" href="{% static 'polls/css/bootstrap.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'polls/css/bootstrap-table.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/css/mdb.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}">
+
         <script src="{% static 'polls/js/jquery.min.js' %}"></script>
         <script src="{% static 'polls/js/popper.min.js' %}"></script> {#  for dropdown  #}
-        <script src="{% static 'polls/js/jcanvas.min.js' %}"></script>
+        <script src="{% static 'polls/js/mdb.min.js' %}"></script>
         <script src="{% static 'polls/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'polls/js/jcanvas.min.js' %}"></script>
         <script src="{% static 'polls/js/bootstrap-table.js' %}"></script>
         <script src="{% static 'polls/js/echarts.min.js' %}"></script>
         <script>
@@ -23,8 +27,8 @@
 <body>
 {#navigation#}
 <nav class="navbar navbar-expand-lg navbar-dark bg-green container">
-  <button id="btn">Show/Hide</button>
-  <a class="navbar-brand" href="{% url 'polls:index' %}">NVIDIA SWDL-QA</a>
+{#  <button id="btn">Show/Hide</button>#}
+  <a class="navbar-brand" href="{% url 'polls:index' %}"> SWDLQA</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -40,6 +44,9 @@
       <li class="nav-item">
         <a class="nav-link" href={% url 'polls:echarts' %}>echarts demo</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href={% url 'polls:form' %}>django form</a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown
@@ -51,9 +58,11 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
+{% comment %}
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
+{% endcomment %}
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

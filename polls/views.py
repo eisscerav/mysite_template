@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Question, Choice, Person
+from .forms import MyForm
 from django.urls import reverse
 
 
@@ -71,3 +72,12 @@ def echarts(request):
         'persons': persons
     }
     return render(request, 'polls/echarts.html', context)
+
+
+def form(request):
+    # GET method
+    form_ = MyForm()
+    context = {
+        'form': form_
+    }
+    return render(request, 'polls/my_form.html', context)

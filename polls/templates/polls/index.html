@@ -33,6 +33,13 @@
     </div>
   </div>
 </form>
+
+<div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker container">
+  <input placeholder="Select date" type="text" id="example" class="form-control">
+  <label for="example">Try me...</label>
+  <i class="fas fa-calendar input-prefix" tabindex=0></i>
+</div>
+
 <div class="container">
 {% if latest_question_list %}
     <ul>
@@ -71,19 +78,24 @@
         {% endfor %}
     </tbody>
     </table>
-    <script>
-      $(function() {
-        $('#table').bootstrapTable({
-            pagination: true,
-            pageSize: 5,
-            paginationLoop: false,
-            pageList: [5, 10, 20],
-            search: true,
-            smartDisplay:false,
-        });
-        $('.dataTables_length').addClass('bs-select');
-      })
-    </script>
+
+<script>
+{#$.noConflict();#}
+  $(function() {
+    $('#table').bootstrapTable({
+        pagination: true,
+        pageSize: 5,
+        paginationLoop: false,
+        pageList: [5, 10, 20],
+        search: true,
+        smartDisplay:false,
+    });
+    $('.dataTables_length').addClass('bs-select');
+  });
+  $(function () {
+    $('.datepicker').datepicker();
+  })
+</script>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}

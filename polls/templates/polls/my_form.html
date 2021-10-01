@@ -1,0 +1,9 @@
+{% extends 'polls/navigation.html' %}
+
+{% block content %}
+    <form action="#" method="post" class="container">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

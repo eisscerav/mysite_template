@@ -14,4 +14,5 @@ urlpatterns = [
     path('table/', views.table, name='table'),
     path('search/', views.search, name='search'),
     path('charts/', views.echarts, name='echarts'),
+    path('forms/', views.form, name='form'),
 ]
