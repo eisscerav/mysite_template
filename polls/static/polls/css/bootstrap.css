@@ -1918,7 +1918,6 @@ pre code {
   border-color: #dee2e6;
 }
 
-
 .table-dark {
   color: #fff;
   background-color: #343a40;
@@ -4705,10 +4704,6 @@ input[type="button"].btn-block {
   color: #fff;
 }
 
-.navbar-custom .navbar-brand{
-  color: #1e7e34;
-}
-
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
   color: #fff;
 }
@@ -6823,10 +6818,6 @@ button.bg-light:focus {
 
 .bg-dark {
   background-color: #343a40 !important;
-}
-
-.bg-green {
-  background-color: #1c7430 !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,

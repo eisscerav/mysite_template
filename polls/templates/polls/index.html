@@ -28,17 +28,14 @@
         <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
       </div>
     </div>
+    <p class="container">Date: <input type="text" id="datepicker" name="datetime"></p>
     <div class="col-auto my-1">
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </div>
 </form>
 
-<div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker container">
-  <input placeholder="Select date" type="text" id="example" class="form-control">
-  <label for="example">Try me...</label>
-  <i class="fas fa-calendar input-prefix" tabindex=0></i>
-</div>
+
 
 <div class="container">
 {% if latest_question_list %}
@@ -80,7 +77,6 @@
     </table>
 
 <script>
-{#$.noConflict();#}
   $(function() {
     $('#table').bootstrapTable({
         pagination: true,
@@ -93,8 +89,8 @@
     $('.dataTables_length').addClass('bs-select');
   });
   $(function () {
-    $('.datepicker').datepicker();
-  })
+        $('#datepicker').datepicker()
+  });
 </script>
 {% else %}
     <p>No polls are available.</p>
