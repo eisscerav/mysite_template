@@ -86,21 +86,24 @@
             })
         </script>
     </div>
-    <table
-{#      class="container"#}
-      data-toggle="table"
-      data-height="460"
-      data-url="{% static 'polls/data1.json' %}"
-      data-show-columns="true"
-      data-show-columns-search="true"
-      data-show-fullscreen="true"
-    >
-      <thead>
-        <tr>
-          <th data-field="id">Item ID</th>
-          <th data-field="name">Item Name</th>
-          <th data-field="price">Item Price</th>
-        </tr>
-      </thead>
-    </table>
+
+    <div class="container">
+        <table
+          class=""
+          data-toggle="table"
+          data-height="460"
+          data-url="{% static 'polls/data1.json' %}"
+          data-show-columns="true"
+          data-show-columns-search="true"
+          data-show-fullscreen="true"
+        >
+          <thead class="">
+            <tr>
+              <th data-field="id">Item ID</th>
+              <th data-field="name">Item Name</th>
+              <th data-field="price">Item Price</th>
+            </tr>
+          </thead>
+        </table>
+    </div>
 {% endblock %}
