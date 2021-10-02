@@ -4,12 +4,12 @@
 {% block content %}
     <div id="echarts_demo" style="width: 1600px;height:400px;"></div>
 
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered" id="person-table">
+        <thead >
             <tr>
                 <th>name</th>
                 <th>age</th>
-                <th>score</th>
+                <th data-sortable="true">score</th>
             </tr>
         </thead>
         <tbody>
@@ -87,9 +87,23 @@
             let score = $(this).text();
             if(score < 70){
                 console.log(score);
-                $(this).addClass('bg-danger')
+                {#$(this).addClass('bg-danger')#}
+                $(this).css('background', "#dc5b5b");
+                $(this).css('color', "#ffffff");
             }
         })
     })
+
+    $(function() {
+        $('#person-table').bootstrapTable({
+            pagination: true,
+            pageSize: 10,
+            paginationLoop: false,
+            pageList: [10, 20, 30],
+            search: true,
+            smartDisplay:false,
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
     </script>
 {% endblock %}
