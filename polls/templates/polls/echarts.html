@@ -4,6 +4,24 @@
 {% block content %}
     <div id="echarts_demo" style="width: 1600px;height:400px;"></div>
 
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>age</th>
+                <th>score</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in persons %}
+            <tr>
+                <td>{{ person.name }}</td>
+                <td>{{ person.age }}</td>
+                <td class="td-score">{{ person.score }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <script type="text/javascript">
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById('echarts_demo'));
@@ -62,5 +80,16 @@
 
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option);
+
+    $(function () {
+        $('.td-score').each(function (){
+            //if score < 70 in table, set to red
+            let score = $(this).text();
+            if(score < 70){
+                console.log(score);
+                $(this).addClass('bg-danger')
+            }
+        })
+    })
     </script>
 {% endblock %}
