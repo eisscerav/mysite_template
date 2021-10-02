@@ -58,11 +58,12 @@
     </thead>
     <tbody>
         {% for question in latest_question_list %}
-        <tr>
+        <tr class="">
 {#            <td>{{ question.id }}</td>#}
             <td>{{ forloop.counter }}</td>
             <td rowspan="1">{{ question.question_text  }}</td>
-            <td>{% for choice in question.choice_set.all %}
+            <td class="">
+            {% for choice in question.choice_set.all %}
                     {{ choice.choice_text }}
             {% endfor %}</td>
             <td>{{ question.pub_date }}</td>
@@ -89,8 +90,9 @@
     $('.dataTables_length').addClass('bs-select');
   });
   $(function () {
-        $('#datepicker').datepicker()
+    $('#datepicker').datepicker()
   });
+  })
 </script>
 {% else %}
     <p>No polls are available.</p>
