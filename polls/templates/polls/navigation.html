@@ -42,24 +42,24 @@
 <nav class="navbar navbar-expand-lg navbar-dark container table-green">
 {#    style="background:#0ec938;">#}
 {#  <button id="btn">Show/Hide</button>#}
-  <a class="navbar-brand" href="{% url 'polls:index' %}"> SWDLQA</a>
+  <a class="navbar-brand" href="#">SWDLQA</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'polls:index' %}"><i class="fa fa-home"></i> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href={% url 'polls:table' %}>bootstrap table</a>
+        <a class="nav-link" href={% url 'polls:table' %}><i class="fa fa-table"></i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href={% url 'polls:echarts' %}>echarts demo</a>
+        <a class="nav-link" href={% url 'polls:echarts' %}><i class="fa fa-bar-chart"></i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href={% url 'polls:form' %}>django form</a>
+        <a class="nav-link" href={% url 'polls:form' %}><i class="fa fa-tasks"></i></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,5 +87,6 @@
 
 {% block content %}
 {% endblock %}
+
 </body>
 </html>

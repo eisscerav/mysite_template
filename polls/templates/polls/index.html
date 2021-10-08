@@ -93,6 +93,10 @@
     $('#datepicker').datepicker()
   });
 
+  //todo: don't select li by using const number
+  $(function (){
+    $("i.fa-home").parent().parent().addClass("active");
+  })
 </script>
 {% else %}
     <p>No polls are available.</p>
