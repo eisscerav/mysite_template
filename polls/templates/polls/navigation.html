@@ -50,16 +50,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'polls:index' %}"><i class="fa fa-home"></i> <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'polls:index' %}" data-toggle="tooltip" title="HOME"><i class="fa fa-home fa-2x"></i> <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href={% url 'polls:table' %}><i class="fa fa-table"></i></a>
+        <a class="nav-link" href="{% url 'polls:table' %}" data-toggle="tooltip" title="TABLE"><i class="fa fa-table fa-2x"></i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href={% url 'polls:echarts' %}><i class="fa fa-bar-chart"></i></a>
+        <a class="nav-link" href="{% url 'polls:echarts' %}" data-toggle="tooltip" title="CHART"><i class="fa fa-bar-chart fa-2x"></i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href={% url 'polls:form' %}><i class="fa fa-tasks"></i></a>
+        <a class="nav-link" href="{% url 'polls:form' %}" data-toggle="tooltip" title="FORM"><i class="fa fa-tasks fa-2x"></i></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -88,5 +88,11 @@
 {% block content %}
 {% endblock %}
 
+<script>
+    //mouse enter to show hints by using bootstrap tooltip
+    $(function (){
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+</script>
 </body>
 </html>
