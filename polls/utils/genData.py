@@ -1,7 +1,8 @@
 import sys, os, json
+import argparse
+#todo: make path configurable or don't set to a const path
 sys.path.append(r"/home/fanxin/github/mysite_template")
 import django
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite_template.settings")
 django.setup()
 
@@ -65,8 +66,19 @@ def genPerson():
         person.save()
 
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--json', action='store_true')
+    parser.add_argument('--person', action='store_true')
+    parser.add_argument('--data', action='store_true')
+    args = parser.parse_args()
+    if args.json:
+        genJson()
+    if args.person:
+        genPerson()
+    if args.data:
+        genData()
+
+
 if __name__ == "__main__":
-    genPerson()
-
-
-
+    main()
