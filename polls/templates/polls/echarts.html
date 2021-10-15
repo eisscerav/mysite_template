@@ -24,6 +24,29 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="chart-in-modal" style="width: 400px;height:600px;"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="clr-modal">clear contents in modal</button>
+
     <script type="text/javascript">
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById('echarts_demo'));
@@ -84,11 +107,11 @@
       myChart.setOption(option);
 
     $(function () {
-        $('.td-score').each(function (){
+        $('.td-score').each(function (index, element){
             //if score < 70 in table, set to red
             let score = $(this).text();
             if(score < 70){
-                console.log(score);
+                {#console.log(score);#}
                 {#$(this).addClass('bg-danger')#}
                 $(this).css('background', "#dc5b5b");
                 $(this).css('color', "#ffffff");
@@ -109,7 +132,83 @@
     });
 
     $(function (){
+        $("td").on("click", function (){
+            $("#exampleModal").modal();
+        })
+
+    })
+
+    //insert a chart into modal
+    //todo: use dynamic data for chart
+    $(function (){
+        $("#exampleModal").on("shown.bs.modal", function (e){
+            var myChart = echarts.init(document.getElementById('chart-in-modal'));
+
+            // 指定图表的配置项和数据
+            var option = {
+            title: {
+              text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+              data: ['销量']
+            },
+            xAxis: {
+              data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+            },
+            yAxis: {},
+            series: [
+              {
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+              }
+            ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        })
+    })
+
+    $(function (){
         $("i.fa-bar-chart").parent().parent().addClass("active");
     })
+
+{% comment %}
+        //below would lost click event after changing page
+        $("td").click(function (){
+            {#let age = $(this).parent().children('td:eq(2)').text();#}
+            {#let score = $(this).parent().children('td:eq(3)').text();#}
+            {#console.log(age);#}
+            {#console.log(score);#}
+            console.log($(this).text());
+        })
+        $("td").on("click", function (){
+            console.log($(this).text());
+        })
+
+        $("#clr-modal").on("click", function (){
+            alert('clr-modal');
+            $(".model-body").empty();
+        })
+        $(document).on("click", "td", function (){
+            let age = $(this).parent().children('td:eq(2)').text();
+            let score = $(this).parent().children('td:eq(3)').text();
+            {#$(".model-body div").remove();#}
+            $(".modal-body").append(function (){
+                let text1 =  "<h5>insert h5 into modal body</h5>";
+                let text2 = "<h5>age: "+age+" score: "+score+"</h5>";
+                return text1+text2;
+            });
+            $("#exampleModal").modal();
+        })
+    $(function (){
+        $("#exampleModal").on("show.bs.modal", function (e){
+            console.log("show.bs.modal");
+            alert("show.bs.modal");
+        })
+    })
+{% endcomment %}
     </script>
 {% endblock %}
