@@ -45,7 +45,6 @@
         </div>
       </div>
     </div>
-    <button id="clr-modal">clear contents in modal</button>
 
     <script type="text/javascript">
       // 基于准备好的dom，初始化echarts实例
@@ -91,14 +90,24 @@
         series: [
           {
             name: 'scores',
-            type: 'bar',
-            data: scores
-            {#data: [5, 20, 36, 10, 10, 20]#}
+            type: 'line',
+            data: scores,
+            markLine: {
+                data: [
+                    {type: 'average', name: 'average'}
+                ]
+            },
+            {# static data: [5, 20, 36, 10, 10, 20]#}
           },
           {
             name: 'age',
             type: 'line',
-            data: ages
+            data: ages,
+            lineStyle: {
+                color: '#5470C6',
+                width: 4,
+                type: 'dotted'
+            },
           }
         ]
       };
@@ -131,11 +140,21 @@
         $('.dataTables_length').addClass('bs-select');
     });
 
+    var age;
+    var score;
     $(function (){
         $("td").on("click", function (){
+            age = $(this).parent().children('td:eq(2)').text();
+            score = $(this).parent().children('td:eq(3)').text();
+            var elements = $(this).parent().children('td');
+            $(elements).each(function (id, element){
+                console.log(id);
+                console.log(element);
+                {#console.log($(this));#}
+                {#console.log($(this).text());#}
+            })
             $("#exampleModal").modal();
         })
-
     })
 
     //insert a chart into modal
@@ -143,7 +162,6 @@
     $(function (){
         $("#exampleModal").on("shown.bs.modal", function (e){
             var myChart = echarts.init(document.getElementById('chart-in-modal'));
-
             // 指定图表的配置项和数据
             var option = {
             title: {
@@ -154,14 +172,19 @@
               data: ['销量']
             },
             xAxis: {
-              data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+              data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', 'age']
             },
             yAxis: {},
             series: [
               {
-                name: '销量',
+                name: 'score',
                 type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                data: [5, 20, 36, 10, 10, score]
+              },
+              {
+                name: 'age',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, age]
               }
             ]
             };
@@ -188,10 +211,6 @@
             console.log($(this).text());
         })
 
-        $("#clr-modal").on("click", function (){
-            alert('clr-modal');
-            $(".model-body").empty();
-        })
         $(document).on("click", "td", function (){
             let age = $(this).parent().children('td:eq(2)').text();
             let score = $(this).parent().children('td:eq(3)').text();
