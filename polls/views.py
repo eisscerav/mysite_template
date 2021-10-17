@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import loader
 from .models import Question, Choice, Person
 from .forms import MyForm
@@ -83,3 +83,11 @@ def form(request):
         'form': form_
     }
     return render(request, 'polls/my_form.html', context)
+
+
+def ajax_post(request):
+    ret = {
+        'aa': 11,
+        'bb': 22,
+    }
+    return JsonResponse(ret)

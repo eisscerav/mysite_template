@@ -3,6 +3,7 @@
 
 {% block content %}
     <div class="container">
+        <button type="button" class="btn" id="ajax_post">Ajax Post</button>
         {% if  cudaVer != "CUDA VERSION..."  %}
         <h1 class="container">CUDA VERSION:  {{ cudaVer }}  Driver: {{ driver }}</h1>
         {% endif %}
@@ -28,63 +29,16 @@
           </tbody>
         </table>
         <script>
-          $(function() {
-            $('#table').bootstrapTable()
-          })
+
         </script>
     <br>
         <button id="btn1" class="button">Draw Canvas</button>
         <table id="table" class="container">booststrap table via js</table>
         <script>
-            let columns = [{
-                field: 'id',
-                title: 'Item ID'
-              }, {
-                field: 'question',
-                title: 'question'
-              }, {
-                field: 'choice',
-                title: 'choice'
-              }];
 
-            let data = [
-                {
-                    id: 1,
-                    question: 'Item 1',
-                    choice: '$1'
-                },
-                {
-                    id: 2,
-                    question: 'Item 2',
-                    choice: '$2'
-                },
-                ];
-            $('#table').bootstrapTable({
-              columns: columns,
-              data: data,
-            })
         </script>
         <canvas></canvas>
         <canvas></canvas>
-        <script>
-            $("canvas").drawPolygon({
-              draggable: true,
-              fillStyle: "#6c3",
-              x: 100, y: 100,
-              radius: 50, sides: {{ ten }}
-            }).drawLayers();
-
-            $(function (){
-                $("#btn1").click(function (){
-                    $("canvas").eq(1).toggle(function (){
-                        //callback for toggle()
-                    });
-                });
-            });
-            $(function (){
-                $("i.fa-table").parent().parent().addClass("active");
-            })
-        </script>
     </div>
 
     <div class="container">
@@ -106,4 +60,73 @@
           </thead>
         </table>
     </div>
+
+    <script>
+        $("canvas").drawPolygon({
+          draggable: true,
+          fillStyle: "#6c3",
+          x: 100, y: 100,
+          radius: 50, sides: {{ ten }}
+        }).drawLayers();
+
+        $(function (){
+            $("#btn1").click(function (){
+                $("canvas").eq(1).toggle(function (){
+                    //callback for toggle()
+                });
+            });
+        });
+        $(function (){
+            $("i.fa-table").parent().parent().addClass("active");
+        })
+
+        let columns = [{
+            field: 'id',
+            title: 'Item ID'
+          }, {
+            field: 'question',
+            title: 'question'
+          }, {
+            field: 'choice',
+            title: 'choice'
+          }];
+
+        let data = [
+            {
+                id: 1,
+                question: 'Item 1',
+                choice: '$1'
+            },
+            {
+                id: 2,
+                question: 'Item 2',
+                choice: '$2'
+            },
+            ];
+        $('#table').bootstrapTable({
+          columns: columns,
+          data: data,
+        })
+
+        $(function() {
+            $('#table').bootstrapTable()
+        })
+
+        //jquery ajax post
+        $(function () {
+            $('#ajax_post').on("click", function (){
+                $.post("{% url 'polls:ajax_post' %}",
+                {
+                //post data
+                //todo: use dynamic data
+                    'a': 1,
+                    'b': 2,
+                    csrfmiddlewaretoken: {{ csrf_token }},
+                },
+                function (data, status) {
+                    console.log(data);
+                })
+            })
+        })
+    </script>
 {% endblock %}

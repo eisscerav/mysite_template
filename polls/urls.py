@@ -15,4 +15,5 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('charts/', views.echarts, name='echarts'),
     path('forms/', views.form, name='form'),
+    path('ajax_post', views.ajax_post, name='ajax_post'),
 ]
