@@ -121,7 +121,7 @@
                 //todo: use dynamic data
                     'a': 1,
                     'b': 2,
-                    csrfmiddlewaretoken: {{ csrf_token }},
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
                 },
                 function (data, status) {
                     console.log(data);
