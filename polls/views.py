@@ -59,8 +59,8 @@ def table(request):
 def search(request):
     cudaVer = request.POST['cudaVer']
     driver = request.POST['driver']
-    pref = request.POST['preference']
     datetime = request.POST['datetime']
+    pref = request.POST.get('preference', 'off')
     context = {
         'cudaVer': cudaVer,
         'driver': driver
