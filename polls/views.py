@@ -57,12 +57,12 @@ def table(request):
 
 
 def search(request):
-    cudaVer = request.POST['cudaVer']
+    cuda_version = request.POST['cudaVer']
     driver = request.POST['driver']
     datetime = request.POST['datetime']
     pref = request.POST.get('preference', 'off')
     context = {
-        'cudaVer': cudaVer,
+        'cudaVer': cuda_version,
         'driver': driver
     }
     return render(request, 'polls/bt_table.html', context)

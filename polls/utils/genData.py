@@ -17,17 +17,17 @@ def genData():
     print("Generate foo data into database...")
     questions = [chr(x) for x in range(65, 91)]
     choices = [chr(x) for x in range(97, 123)]
-    numberOfQuestion = random.randint(2, 5)
-    for each in range(numberOfQuestion):
-        questionList = random.sample(questions, 5)
-        questionText = ''.join(questionList)
-        q = Question(question_text=questionText, pub_date=timezone.now())
+    number_of_question = random.randint(2, 5)
+    for each in range(number_of_question):
+        question_list = random.sample(questions, 5)
+        question_text = ''.join(question_list)
+        q = Question(question_text=question_text, pub_date=timezone.now())
         q.save()
         for i in range(3):
-            choiceList = random.sample(choices, 3)
-            choiceText = ''.join(choiceList)
+            choice_list = random.sample(choices, 3)
+            choice_text = ''.join(choice_list)
             rand = random.randint(1, 10)
-            q.choice_set.create(choice_text=choiceText, votes=rand)
+            q.choice_set.create(choice_text=choice_text, votes=rand)
     # for each in range(count):
     #     char = random.randint(65, 91)
     #     question.append(char)
@@ -66,18 +66,27 @@ def genPerson():
         person.save()
 
 
+def demo_filer_person():
+    empty_person = Person.objects.filter(name__icontains='vh')
+    filter_persons = Person.objects.filter(age__exact=20).filter(name__icontains='fb')
+    for p in filter_persons:
+        print(p)
+    print(empty_person.exists(), filter_persons.exists())
+
+
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--json', action='store_true')
-    parser.add_argument('--person', action='store_true')
-    parser.add_argument('--data', action='store_true')
-    args = parser.parse_args()
-    if args.json:
-        genJson()
-    if args.person:
-        genPerson()
-    if args.data:
-        genData()
+    demo_filer_person()
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('--json', action='store_true')
+    # parser.add_argument('--person', action='store_true')
+    # parser.add_argument('--data', action='store_true')
+    # args = parser.parse_args()
+    # if args.json:
+    #     genJson()
+    # if args.person:
+    #     genPerson()
+    # if args.data:
+    #     genData()
 
 
 if __name__ == "__main__":
