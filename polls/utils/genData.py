@@ -69,8 +69,9 @@ def genPerson():
 def demo_filer_person():
     empty_person = Person.objects.filter(name__icontains='vh')
     filter_persons = Person.objects.filter(age__exact=20).filter(name__icontains='fb')
-    for p in filter_persons:
-        print(p)
+    if filter_persons.exists():
+        for p in filter_persons:
+            print(p)
     print(empty_person.exists(), filter_persons.exists())
 
 
