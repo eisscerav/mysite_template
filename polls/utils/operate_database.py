@@ -1,8 +1,9 @@
 import sys, os, json
 import argparse
+import django
+
 #todo: make path configurable or don't set to a const path
 sys.path.append(r"/home/fanxin/github/mysite_template")
-import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite_template.settings")
 django.setup()
 
