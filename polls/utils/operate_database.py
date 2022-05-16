@@ -43,7 +43,7 @@ def genData():
     # q.choice_set.create(choice_text="ghi", votes=5)
 
 
-def genJson():
+def gen_json():
     print("Generate foo data in json fashion")
     mydict = {}
     mydict["id"] = 1
@@ -55,7 +55,7 @@ def genJson():
         json.dump(mydict, output)
 
 
-def genPerson():
+def gen_person():
     print("Generate foo data for table Person")
     foo_names = [chr(x) for x in range(65, 91)]
     numOfPerson = random.randint(1, 10)
