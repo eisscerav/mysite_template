@@ -4,10 +4,9 @@ import django
 
 #todo: make path configurable or don't set to a const path
 sys.path.append(r"/home/fanxin/github/mysite_template")
+sys.path.append(r"/home/test/pycharm_remote/mysite_template")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite_template.settings")
 django.setup()
-
-
 from polls.models import Question, Choice, Person
 from django.utils import timezone
 import datetime
@@ -68,7 +67,10 @@ def gen_person():
 
 
 def demo_filer_person():
+    # https://www.liujiangblog.com/course/django/129
+    all_persons = Person.objects.all()
     empty_person = Person.objects.filter(name__icontains='vh')
+    # todo: try objects.filter().exclude()
     filter_persons = Person.objects.filter(age__exact=20).filter(name__icontains='fb')
     if filter_persons.exists():
         for p in filter_persons:
