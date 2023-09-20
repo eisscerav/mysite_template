@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'mysite_template.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydatabase',
+        'NAME': 'vectorcast_database',
         'USER': 'ffan',
-        'PASSWORD': '62435243',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'ffan',
+        'HOST': '10.23.137.213',
         'PORT': '3306',
     }
 }
