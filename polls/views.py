@@ -94,6 +94,8 @@ def edittable(request):
 
 
 def ajax_post(request):
+    name = request.POST.get("name")
+    age = request.POST.get("age")
     old_ = request.POST.get("old_")
     new_ = request.POST.get("new_")
     # todo: save updates to database

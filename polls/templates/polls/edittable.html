@@ -20,24 +20,35 @@
                 <td class="td-score">{{ person.score }}</td>
                 <td><button id="btn{{ forloop.counter }}" class="btn">Edit</button></td>
 {#                <td><input id="table+{{ forloop.counter }}" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"></td>#}
-
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
 <script>
+    $(function() {
+        $(".btn").click(function () {
+            {#alert("click btn "+this.id)#}
+            var name = $(this).parent().parent().children('td:eq(1)').text()
+            var age = $(this).parent().siblings('td:eq(2)').text()
+            alert("name: "+name)
+            console.log(name)
+            console.log(age)
+            $.post("{% url 'polls:ajax_post' %}",
+                {
+                  name: name,
+                  age: age,
+                  csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                function (data, status) {
+                    alert(data)
+                }
+            )
+        })
+    })
+
+    {% comment %}
     $(function () {
-        {#$(".btn").click(function () {#}
-            {#alert("click btn")#}
-        {#    var td = $(this).parent().siblings("td")#}
-        {#    alert(td)#}
-        {#    td.each(function (index, element) {#}
-        {#        var val = element.text();#}
-        {#        alert(val);#}
-        {#        console.log(val);#}
-        {#    })#}
-      //  {#})#}
         // todo: make your own editable button
         var logAllEvents = true;
         //Basic editor with no navigation
@@ -59,6 +70,7 @@
             console.log(`'${event.oldValue}' changed to '${event.newValue}'`);
         })
     })
+    {% endcomment %}
 
 </script>
 {% endblock %}
