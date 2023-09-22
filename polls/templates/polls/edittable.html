@@ -1,7 +1,71 @@
 {% extends 'polls/navigation.html' %}
 
 {% block content %}
-    <table class="table table-bordered" id="personTable">
+{#<h2 class="">Edit table with SimpleTableCellEditor</h2>#}
+{#    <table class="table table-bordered" id="personTable">#}
+{#        <thead class="table-green">#}
+{#            <tr>#}
+{#                <th>ID</th>#}
+{#                <th>name</th>#}
+{#                <th>age</th>#}
+{#                <th data-sortable="true">score</th>#}
+{#                <th>Edit</th>#}
+{#                <th>Input</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for person in persons %}#}
+{#            <tr>#}
+{#                <td>{{ forloop.counter }}</td>#}
+{#                <td class="editMe">{{ person.name }}</td>#}
+{#                <td>{{ person.age }}</td>#}
+{#                <td class="td-score">{{ person.score }}</td>#}
+{#                <td><button id="btn{{ forloop.counter }}" class="btn">Edit</button></td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+<br>
+<h2 class="">Edit table with modal</h2>
+{#    <table class="table table-bordered table-striped">#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th class="">№</th>#}
+{#                <th class="">Name</th>#}
+{#                <th class="">Email/Login</th>#}
+{#                <th class="">Phone</th>#}
+{#                <th class="">Skype</th>#}
+{#                <th class="">Role</th>#}
+{#                <th class="">Edit</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#            <tr>#}
+{#                <td style="text-align:center;" class="">1</td>#}
+{#                <td class="">user123</td>#}
+{#                <td style="text-align:center;" class="">123@hotmail.com</td>#}
+{#                <td style="text-align:center;" class="">0123456</td>#}
+{#                <td style="text-align:center;" class="">user123</td>#}
+{#                <td style="text-align:center;" class="">Admin</td>#}
+{#                <td style="text-align:center;">#}
+{#                    <button class="btn btn-success" data-toggle="modal" data-target="#myModal" contenteditable="false">Edit</button>#}
+{#                </td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <td style="text-align:center;" class="">2</td>#}
+{#                <td class="">user456</td>#}
+{#                <td style="text-align:center;" class="">456@hotmail.com</td>#}
+{#                <td style="text-align:center;" class="">0123458</td>#}
+{#                <td style="text-align:center;" class="">user456</td>#}
+{#                <td style="text-align:center;" class="">User</td>#}
+{#                <td style="text-align:center;">#}
+{#                    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>#}
+{#                </td>#}
+{#            </tr>#}
+{#        </tbody>#}
+{#    </table>#}
+
+<table class="table table-bordered" id="personTable">
         <thead class="table-green">
             <tr>
                 <th>ID</th>
@@ -9,6 +73,7 @@
                 <th>age</th>
                 <th data-sortable="true">score</th>
                 <th>Edit</th>
+{#                <th>Input</th>#}
             </tr>
         </thead>
         <tbody>
@@ -18,36 +83,71 @@
                 <td class="editMe">{{ person.name }}</td>
                 <td>{{ person.age }}</td>
                 <td class="td-score">{{ person.score }}</td>
-                <td><button id="btn{{ forloop.counter }}" class="btn">Edit</button></td>
-{#                <td><input id="table+{{ forloop.counter }}" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"></td>#}
+                <td><button class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"></div>
+        </div>
+        <div class="modal-dialog">
+            <div class="modal-content"></div>
+        </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
+
+                    </button>
+                     <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <script>
+{#    {% comment %}#}
     $(function() {
-        $(".btn").click(function () {
+        $(".editMe").click(function () {
+        {#$(".editMe").click(function () {#}
             {#alert("click btn "+this.id)#}
             var name = $(this).parent().parent().children('td:eq(1)').text()
             var age = $(this).parent().siblings('td:eq(2)').text()
-            alert("name: "+name)
-            console.log(name)
-            console.log(age)
-            $.post("{% url 'polls:ajax_post' %}",
-                {
-                  name: name,
-                  age: age,
-                  csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
-                function (data, status) {
-                    alert(data)
-                }
-            )
+            {#var name = $(this).text()#}
+            {#var age = $(this).siblings('td:eq(2)').text()#}
+            var txt = '<input id="myinput" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">'
+            $(this).html(txt)
+            {#$(".form-control").change(function () {#}
+            {#    alert(name)#}
+            //{#})#}
+            {#alert("name: "+name)#}
+            {#console.log(age)#}
+            {#$.post("{% url 'polls:ajax_post' %}",#}
+            {#    {#}
+            {#      name: name,#}
+            {#      age: age,#}
+            {#      csrfmiddlewaretoken: '{{ csrf_token }}',#}
+            {#    },#}
+            {#    function (data, status) {#}
+                    {#alert(data)#}
+            {#        console.log(status)#}
+            {#        console.log(data)#}
+            {#    }#}
+            {#)#}
         })
     })
+{#{% endcomment %}#}
 
-    {% comment %}
+{% comment %}
     $(function () {
         // todo: make your own editable button
         var logAllEvents = true;
@@ -72,52 +172,27 @@
     })
     {% endcomment %}
 
+    $(".btn[data-target='#myModal']").click(function() {
+           var columnHeadings = $("thead th").map(function() {
+                     return $(this).text();
+                  }).get();
+           columnHeadings.pop();
+           var columnValues = $(this).parent().siblings().map(function() {
+                     return $(this).text();
+           }).get();
+      var modalBody = $('<div id="modalContent"></div>');
+      var modalForm = $('<form role="form" name="modalForm" action="{% url 'polls:ajax_post' %}" method="post">{% csrf_token %}</form>');
+      $.each(columnHeadings, function(i, columnHeader) {
+           var formGroup = $('<div class="form-group"></div>');
+           formGroup.append('<label for="'+columnHeader+'">'+columnHeader+'</label>');
+           formGroup.append('<input class="form-control" name="'+columnHeader+i+'" id="'+columnHeader+i+'" value="'+columnValues[i]+'" />');
+           modalForm.append(formGroup);
+      });
+      modalBody.append(modalForm);
+      $('.modal-body').html(modalBody);
+    });
+    $('.modal-footer .btn-primary').click(function() {
+       $('form[name="modalForm"]').submit();
+    });
 </script>
 {% endblock %}
-
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#<head>#}
-{#<meta charset="utf-8">#}
-{#<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">#}
-{#</script>#}
-{#<script>#}
-{#$(document).ready(function(){#}
-{#  $("#btn1").click(function(){#}
-{#    alert("Text: " + $("#test").text());#}
-{#  });#}
-{#  $("#btn2").click(function(){#}
-{#    alert("HTML: " + $("#test").html());#}
-{#  });#}
-{#  $("#btn3").click(function(){#}
-{#    alert("Val: " + $("#test").val());#}
-{#  });#}
-{#  $("#btn4").click(function(){#}
-{#    $.post("{% url 'polls:ajax_post' %}",#}
-{#        {#}
-{#            //post data#}
-{#            //todo: use dynamic data#}
-{#            'a': 1,#}
-{#            'b': 2,#}
-{#            'name': 'ffan',#}
-{#        csrfmiddlewaretoken: '{{ csrf_token }}',#}
-{#        },#}
-{#        function (data, status) {#}
-{#            console.log(status)#}
-{#            console.log(data);#}
-{#        })#}
-{#  });#}
-{#});#}
-{#</script>#}
-{#</head>#}
-{##}
-{#<body>#}
-{#<p id="test">这是段落中的 <b>粗体</b> 文本。</p>#}
-{#<button id="btn1" class="">显示文本</button>#}
-{#<button id="btn2">显示 HTML</button>#}
-{#<button id="btn3">显示 val</button>#}
-{#<br>#}
-{#<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">#}
-{#<button id="btn4">update</button>#}
-{#</body>#}
-{#</html>#}
