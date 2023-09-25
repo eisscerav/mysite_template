@@ -195,7 +195,7 @@
 
 {#{% comment %}#}
     $(".btn[data-target='#myModal']").click(function() {
-           var columnHeadings = $("thead.tb3 th").map(function() {
+           var columnHeadings = $("thead.tb3 th").map(function() { //select element thead with class=tb3
                      return $(this).text()
                   }).get()
            columnHeadings.pop()
