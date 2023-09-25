@@ -1,30 +1,30 @@
 {% extends 'polls/navigation.html' %}
 
 {% block content %}
-{#<h2 class="">Edit table with SimpleTableCellEditor</h2>#}
-{#    <table class="table table-bordered" id="personTable">#}
-{#        <thead class="table-green">#}
-{#            <tr>#}
-{#                <th>ID</th>#}
-{#                <th>name</th>#}
-{#                <th>age</th>#}
-{#                <th data-sortable="true">score</th>#}
-{#                <th>Edit</th>#}
-{#                <th>Input</th>#}
-{#            </tr>#}
-{#        </thead>#}
-{#        <tbody>#}
-{#        {% for person in persons %}#}
-{#            <tr>#}
-{#                <td>{{ forloop.counter }}</td>#}
-{#                <td class="editMe">{{ person.name }}</td>#}
-{#                <td>{{ person.age }}</td>#}
-{#                <td class="td-score">{{ person.score }}</td>#}
-{#                <td><button id="btn{{ forloop.counter }}" class="btn">Edit</button></td>#}
-{#            </tr>#}
-{#        {% endfor %}#}
-{#        </tbody>#}
-{#    </table>#}
+<h2 class="">Edit table with SimpleTableCellEditor</h2>
+    <table class="table table-bordered" id="personTable">
+        <thead class="table-green tb1">
+            <tr>
+                <th>ID</th>
+                <th>name</th>
+                <th>age</th>
+                <th data-sortable="true">score</th>
+                <th>Edit</th>
+                <th>Input</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in persons %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="editMe">{{ person.name }}</td>
+                <td>{{ person.age }}</td>
+                <td class="td-score">{{ person.score }}</td>
+                <td><button id="btn{{ forloop.counter }}" class="btn">Edit</button></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 <br>
 <h2 class="">Edit table with modal</h2>
 {#    <table class="table table-bordered table-striped">#}
@@ -66,14 +66,13 @@
 {#    </table>#}
 
 <table class="table table-bordered" id="personTable">
-        <thead class="table-green">
+        <thead class="table-green tb3">
             <tr>
                 <th>ID</th>
                 <th>name</th>
                 <th>age</th>
                 <th data-sortable="true">score</th>
                 <th>Edit</th>
-{#                <th>Input</th>#}
             </tr>
         </thead>
         <tbody>
@@ -115,37 +114,38 @@
     </div>
 
 <script>
-{#    {% comment %}#}
+    {% comment %}
     $(function() {
         $(".editMe").click(function () {
-        {#$(".editMe").click(function () {#}
             {#alert("click btn "+this.id)#}
             var name = $(this).parent().parent().children('td:eq(1)').text()
             var age = $(this).parent().siblings('td:eq(2)').text()
-            {#var name = $(this).text()#}
-            {#var age = $(this).siblings('td:eq(2)').text()#}
-            var txt = '<input id="myinput" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">'
+            var name = $(this).text()
+            var age = $(this).siblings('td:eq(2)').text()
+            var txt = $('<input id="myinput" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-sm">')
             $(this).html(txt)
-            {#$(".form-control").change(function () {#}
-            {#    alert(name)#}
-            //{#})#}
-            {#alert("name: "+name)#}
-            {#console.log(age)#}
-            {#$.post("{% url 'polls:ajax_post' %}",#}
-            {#    {#}
-            {#      name: name,#}
-            {#      age: age,#}
-            {#      csrfmiddlewaretoken: '{{ csrf_token }}',#}
-            {#    },#}
-            {#    function (data, status) {#}
-                    {#alert(data)#}
-            {#        console.log(status)#}
-            {#        console.log(data)#}
-            {#    }#}
-            {#)#}
+            $(".form-control").change(function () {
+                alert(name)
+            //{)
+            alert("name: "+name)
+            console.log(age)
+            $.post("{% url 'polls:ajax_post' %}",
+                {
+                  name: name,
+                  age: age,
+                  csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                function (data, status) {
+                    alert(data)
+                    console.log(status)
+                    console.log(data)
+                }
+            )
+            })
         })
     })
-{#{% endcomment %}#}
+
+{% endcomment %}
 
 {% comment %}
     $(function () {
@@ -170,10 +170,11 @@
             console.log(`'${event.oldValue}' changed to '${event.newValue}'`);
         })
     })
-    {% endcomment %}
+{% endcomment %}
 
+{#{% comment %}#}
     $(".btn[data-target='#myModal']").click(function() {
-           var columnHeadings = $("thead th").map(function() {
+           var columnHeadings = $("thead.tb3 th").map(function() {
                      return $(this).text()
                   }).get()
            columnHeadings.pop()
@@ -194,5 +195,6 @@
     $('.modal-footer .btn-primary').click(function() {
        $('form[name="modalForm"]').submit()
     })
+{#{% endcomment %}#}
 </script>
 {% endblock %}
