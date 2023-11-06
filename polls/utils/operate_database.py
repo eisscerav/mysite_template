@@ -28,6 +28,7 @@ def genData():
             choice_text = ''.join(choice_list)
             rand = random.randint(1, 10)
             q.choice_set.create(choice_text=choice_text, votes=rand)
+            q.save()
     # for each in range(count):
     #     char = random.randint(65, 91)
     #     question.append(char)
@@ -78,8 +79,15 @@ def demo_filer_person():
     print(empty_person.exists(), filter_persons.exists())
 
 
+def query_choices():
+    choice = Choice.objects.get(pk=1)
+    q = choice.question
+    pass
+
+
 def main():
-    demo_filer_person()
+    query_choices()
+    # genData()
     # parser = argparse.ArgumentParser()
     # parser.add_argument('--json', action='store_true')
     # parser.add_argument('--person', action='store_true')
