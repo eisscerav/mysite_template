@@ -85,7 +85,20 @@ def form(request):
     return render(request, 'polls/my_form.html', context)
 
 
+def edittable(request):
+    persons = Person.objects.all()
+    context = {
+        'persons': persons
+    }
+    return render(request, 'polls/edittable.html', context)
+
+
 def ajax_post(request):
+    name = request.POST.get("name")
+    age = request.POST.get("age")
+    old_ = request.POST.get("old_")
+    new_ = request.POST.get("new_")
+    # todo: save updates to database
     ret = {
         'aa': 11,
         'bb': 22,

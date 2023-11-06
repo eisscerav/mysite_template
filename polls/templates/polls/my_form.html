@@ -7,6 +7,10 @@
         <input type="submit" value="Submit">
     </form>
 
+    <div></div> <button id="div1">div</button><br>
+    <p></p> <button id="p1">p</button><br>
+    <span></span> <button id="span1">span</button><br>
+
     <div class="container">
         <a href="#"><i class="fa fa-skype fa-3x"></i></a>
         <a href="#"><i class="fa fa-slack fa-3x"></i></a>
@@ -14,7 +18,30 @@
 
     <script>
         $(function (){
-            $("i.fa-tasks").parent().parent().addClass("active");
+            $("i.fa-tasks").parent().parent().addClass("active")
+        })
+
+        var arr = [ "a", "b", "c", "d", "e" ]
+
+        $(function () {
+            $("#div1").click(function () {
+                $("#div1").text(arr.join(", "))
+                arr = $.map(arr, function(n, i){
+                    {#alert(n)#}
+                    {#alert(i)#}
+                    return (n.toUpperCase() + i)
+                })
+            })
+            $("#p1").click(function () {
+                $("#p1").text(arr.join(", "))
+                arr = $.map(arr, function (a) {
+                return a + a;
+                })
+            })
+
+            $("#span1").click(function () {
+                $("#span1").text(arr.join(", "));
+            })
         })
     </script>
 {% endblock %}
