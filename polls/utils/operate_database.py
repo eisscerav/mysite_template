@@ -1,10 +1,10 @@
 import sys, os, json
 import argparse
 import django
-
-#todo: make path configurable or don't set to a const path
-sys.path.append(r"/home/fanxin/github/mysite_template")
-sys.path.append(r"/home/test/pycharm_remote/mysite_template")
+dir_path = os.path.dirname(os.path.realpath(__file__))
+project_path = os.path.dirname(os.path.dirname(dir_path))
+sys.path.append(project_path)
+# sys.path.append(r"/home/test/pycharm_remote/mysite_template")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite_template.settings")
 django.setup()
 from polls.models import Question, Choice, Person
