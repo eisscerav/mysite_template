@@ -44,6 +44,13 @@ def genData():
     # q.choice_set.create(choice_text="ghi", votes=5)
 
 
+def reverse_query_choices(q_id=2):
+    q = Question.objects.get(pk=q_id)
+    choices = q.choices.all()
+    # choices = q.choice_set.all()
+    return
+
+
 def gen_json():
     print("Generate foo data in json fashion")
     mydict = {}
@@ -86,6 +93,7 @@ def query_choices():
 
 
 def main():
+    reverse_query_choices()
     query_choices()
     # genData()
     # parser = argparse.ArgumentParser()
